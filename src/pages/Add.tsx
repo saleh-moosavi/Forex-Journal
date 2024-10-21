@@ -1,5 +1,16 @@
-import { useEffect, useReducer, useState } from "react";
+import { FormEvent, useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
+interface reducerStateType {
+  [key: string]: string;
+}
+interface reducerActionType {
+  type: string;
+  value: object[] | object | string;
+}
+interface useParamsType {
+  id?: string | undefined;
+}
 
 // initial value of state
 const init = {
@@ -14,7 +25,7 @@ const init = {
 };
 
 // handle change in state
-const reducer = (state: any, action: any) => {
+const reducer = (state: reducerStateType, action: reducerActionType) => {
   switch (action.type) {
     case "htf":
       return { ...state, htf: action.value };
@@ -33,9 +44,9 @@ const reducer = (state: any, action: any) => {
     case "date":
       return { ...state, date: action.value };
     case "params":
-      return { ...action.value };
+      return {...action.value as any};
     case "reset":
-      return { ...action.value };
+      return {...action.value as any};
 
     default:
       break;
@@ -45,24 +56,24 @@ const reducer = (state: any, action: any) => {
 export default function Add() {
   const [data, dispatch] = useReducer(reducer, init);
   const [error, setError] = useState(false);
-  const params = useParams();
+  const params = useParams() as useParamsType;
   const navigator = useNavigate();
 
   // check open page for edit or add
   useEffect(() => {
     if (params.id) {
-      const all: any = JSON.parse(localStorage.getItem("backtest") || "");
-      const cuurentData = all.filter(
-        (item: any) => all.indexOf(item) == params.id
+      const all: object[] = JSON.parse(localStorage.getItem("backtest") || "");
+      const currentData = all.filter(
+        (item: object) => all.indexOf(item) === Number(params.id)
       );
-      dispatch({ type: "params", value: cuurentData[0] });
+      dispatch({ type: "params", value: currentData[0] });
     } else {
       dispatch({ type: "reset", value: init });
     }
   }, [params.id]);
 
   // add data in localStorage after submit
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (
       data.time != "" &&
@@ -87,7 +98,7 @@ export default function Add() {
   };
 
   // edit data in localStorage after submit
-  const editData = (e: any) => {
+  const editData = (e: FormEvent) => {
     e.preventDefault();
     if (
       data.time != "" &&
@@ -99,8 +110,8 @@ export default function Add() {
       data.currency != "Currency" &&
       data.desc != ""
     ) {
-      const all: any = JSON.parse(localStorage.getItem("backtest") || "");
-      all.splice(params.id, 1, data);
+      const all: object[] = JSON.parse(localStorage.getItem("backtest") || "");
+      all.splice(Number(params.id), 1, data);
       localStorage.setItem("backtest", JSON.stringify(all));
       setError(false);
       navigator("/");

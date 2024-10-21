@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 
 export default function Header() {
-
   //Copy Data To Clipboard
   const copyToClipboard = () => {
     if (navigator.clipboard) {
-      const data: any =
+      const data: string | null =
         localStorage.getItem("backtest") && localStorage.getItem("backtest");
+
       navigator.clipboard
-        .writeText(data)
+        .writeText(data ? data : "")
         .then(() => {
           alert("Text copied to clipboard!");
         })
@@ -31,7 +31,9 @@ export default function Header() {
             <Link to="/add">Add</Link>
           </li>
         </ul>
-        <li className="hover:cursor-pointer" onClick={copyToClipboard}>Copy Data</li>
+        <li className="hover:cursor-pointer" onClick={copyToClipboard}>
+          Copy Data
+        </li>
       </ul>
     </div>
   );
