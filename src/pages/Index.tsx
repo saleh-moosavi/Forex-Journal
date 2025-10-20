@@ -1,6 +1,6 @@
-import ListItem from "./ListItem";
 import useGetData from "../hooks/useGetData";
 import { dataType } from "../types/dataType";
+import CardView from "../components/CardView";
 import { MouseEvent, useEffect, useState } from "react";
 
 export default function Index() {
@@ -25,11 +25,11 @@ export default function Index() {
   };
 
   return (
-    <div className="flex flex-col items-center gap-y-3 pt-20 px-2">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 items-center gap-3 pt-20 px-2">
       {data.length > 0 ? (
         data.map((value, index: number) => {
           return (
-            <ListItem
+            <CardView
               key={index}
               id={index.toString()}
               data={value}
