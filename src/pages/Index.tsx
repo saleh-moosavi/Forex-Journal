@@ -1,14 +1,16 @@
 import ListItem from "./ListItem";
+import useGetData from "../hooks/useGetData";
 import { dataType } from "../types/dataType";
 import { MouseEvent, useEffect, useState } from "react";
 
 export default function Index() {
+  const { getAllData } = useGetData();
   const [data, setData] = useState<dataType[]>([]);
 
   //Get data from localStorage after page loaded
   useEffect(() => {
-    localStorage.getItem("backtest") &&
-      setData(JSON.parse(localStorage.getItem("backtest") || ""));
+    const data = getAllData();
+    setData(data);
   }, []);
 
   //delete data from localStorage when you click on delete button

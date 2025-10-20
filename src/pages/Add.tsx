@@ -1,25 +1,28 @@
-import { FormEvent, useEffect, useReducer, useState } from "react";
+import useGetData from "../hooks/useGetData";
+import useSetData from "../hooks/useSetData";
+import useEditData from "../hooks/useEditData";
 import { useNavigate, useParams } from "react-router-dom";
 import { initialReducer, reducer } from "../utils/reducer";
+import { FormEvent, useEffect, useReducer, useState } from "react";
 
 interface useParamsType {
   id?: string | undefined;
 }
 
 export default function Add() {
-  const [data, dispatch] = useReducer(reducer, initialReducer);
+  const navigator = useNavigate();
+  const { getData } = useGetData();
+  const { setData } = useSetData();
+  const { editData } = useEditData();
   const [error, setError] = useState(false);
   const params = useParams() as useParamsType;
-  const navigator = useNavigate();
+  const [data, dispatch] = useReducer(reducer, initialReducer);
 
   // check open page for edit or add
   useEffect(() => {
     if (params.id) {
-      const all: object[] = JSON.parse(localStorage.getItem("backtest") || "");
-      const currentData = all.filter(
-        (item: object) => all.indexOf(item) === Number(params.id)
-      );
-      dispatch({ type: "params", value: currentData[0] });
+      const data = getData(params.id);
+      dispatch({ type: "params", value: data || initialReducer });
     } else {
       dispatch({ type: "reset", value: initialReducer });
     }
@@ -38,12 +41,8 @@ export default function Add() {
       data.currency != "Currency" &&
       data.desc != ""
     ) {
-      const oldData =
-        localStorage.getItem("backtest") &&
-        JSON.parse(localStorage.getItem("backtest") || "");
-      const newAll = oldData?.length > 0 ? [...oldData, data] : [data];
-      localStorage.setItem("backtest", JSON.stringify(newAll));
       setError(false);
+      setData(data);
       navigator("/");
     } else {
       setError(true);
@@ -51,7 +50,7 @@ export default function Add() {
   };
 
   // edit data in localStorage after submit
-  const editData = (e: FormEvent) => {
+  const handleData = (e: FormEvent) => {
     e.preventDefault();
     if (
       data.time != "" &&
@@ -63,9 +62,7 @@ export default function Add() {
       data.currency != "Currency" &&
       data.desc != ""
     ) {
-      const all: object[] = JSON.parse(localStorage.getItem("backtest") || "");
-      all.splice(Number(params.id), 1, data);
-      localStorage.setItem("backtest", JSON.stringify(all));
+      editData(data, params.id!);
       setError(false);
       navigator("/");
     } else {
@@ -76,7 +73,7 @@ export default function Add() {
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <form
-        onSubmit={(e) => (params.id ? editData(e) : handleSubmit(e))}
+        onSubmit={(e) => (params.id ? handleData(e) : handleSubmit(e))}
         className="flex flex-col w-1/2 lg:w-1/3 gap-y-1 text-xs p-5 backdrop-blur-sm bg-white/20 rounded-lg shadow-white/40 shadow-md"
       >
         {error && (

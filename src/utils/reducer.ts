@@ -1,9 +1,19 @@
 import { dataType } from "../types/dataType";
 
-interface reducerActionType {
-  type: string;
-  value: object[] | object | string;
-}
+type Action =
+  | {
+      type:
+        | "htf"
+        | "mtf"
+        | "ltf"
+        | "result"
+        | "currency"
+        | "desc"
+        | "time"
+        | "date";
+      value: string;
+    }
+  | { type: "params" | "reset"; value: dataType };
 
 // initial value of state
 export const initialReducer = {
@@ -17,31 +27,26 @@ export const initialReducer = {
   ltf: "",
 };
 
-// handle change in state
-export const reducer = (state: dataType, action: reducerActionType) => {
+export const reducer = (state: dataType, action: Action): dataType => {
   switch (action.type) {
     case "htf":
-      return { ...state, htf: action.value };
     case "mtf":
-      return { ...state, mtf: action.value };
     case "ltf":
-      return { ...state, ltf: action.value };
     case "result":
-      return { ...state, result: action.value };
     case "currency":
-      return { ...state, currency: action.value };
     case "desc":
-      return { ...state, desc: action.value };
     case "time":
-      return { ...state, time: action.value };
     case "date":
-      return { ...state, date: action.value };
+      return { ...state, [action.type]: action.value as string };
+
     case "params":
-      return { ...(action.value as any) };
     case "reset":
-      return { ...(action.value as any) };
+      return {
+        ...initialReducer,
+        ...(action.value as Partial<dataType>),
+      } as dataType;
 
     default:
-      break;
+      return state;
   }
 };
