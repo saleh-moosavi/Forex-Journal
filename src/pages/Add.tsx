@@ -1,60 +1,13 @@
 import { FormEvent, useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { initialReducer, reducer } from "../utils/reducer";
 
-interface reducerStateType {
-  [key: string]: string;
-}
-interface reducerActionType {
-  type: string;
-  value: object[] | object | string;
-}
 interface useParamsType {
   id?: string | undefined;
 }
 
-// initial value of state
-const init = {
-  currency: "",
-  result: "",
-  date: "",
-  time: "",
-  desc: "",
-  htf: "",
-  mtf: "",
-  ltf: "",
-};
-
-// handle change in state
-const reducer = (state: reducerStateType, action: reducerActionType) => {
-  switch (action.type) {
-    case "htf":
-      return { ...state, htf: action.value };
-    case "mtf":
-      return { ...state, mtf: action.value };
-    case "ltf":
-      return { ...state, ltf: action.value };
-    case "result":
-      return { ...state, result: action.value };
-    case "currency":
-      return { ...state, currency: action.value };
-    case "desc":
-      return { ...state, desc: action.value };
-    case "time":
-      return { ...state, time: action.value };
-    case "date":
-      return { ...state, date: action.value };
-    case "params":
-      return {...action.value as any};
-    case "reset":
-      return {...action.value as any};
-
-    default:
-      break;
-  }
-};
-
 export default function Add() {
-  const [data, dispatch] = useReducer(reducer, init);
+  const [data, dispatch] = useReducer(reducer, initialReducer);
   const [error, setError] = useState(false);
   const params = useParams() as useParamsType;
   const navigator = useNavigate();
@@ -68,7 +21,7 @@ export default function Add() {
       );
       dispatch({ type: "params", value: currentData[0] });
     } else {
-      dispatch({ type: "reset", value: init });
+      dispatch({ type: "reset", value: initialReducer });
     }
   }, [params.id]);
 

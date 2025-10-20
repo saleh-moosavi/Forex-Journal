@@ -1,16 +1,9 @@
-import { MouseEvent, useEffect, useState } from "react";
 import ListItem from "./ListItem";
-
-type dataType = {
-  [key: string]: string;
-};
+import { dataType } from "../types/dataType";
+import { MouseEvent, useEffect, useState } from "react";
 
 export default function Index() {
-  const initialData: dataType[] = [];
-  const [data, setData]: [
-    dataType[],
-    React.Dispatch<React.SetStateAction<dataType[]>>
-  ] = useState(initialData);
+  const [data, setData] = useState<dataType[]>([]);
 
   //Get data from localStorage after page loaded
   useEffect(() => {
@@ -32,20 +25,13 @@ export default function Index() {
   return (
     <div className="flex flex-col items-center gap-y-3 pt-20 px-2">
       {data.length > 0 ? (
-        data.map((value: dataType, index: number) => {
+        data.map((value, index: number) => {
           return (
             <ListItem
               key={index}
-              dataId={index.toString()}
-              currency={value.currency}
-              result={value.result}
-              date={value.date}
-              time={value.time}
-              desc={value.desc}
-              htf={value.htf}
-              mtf={value.mtf}
-              ltf={value.ltf}
-              deleteHandler={(e: MouseEvent<HTMLElement>) => deleteHandler(e)}
+              id={index.toString()}
+              data={value}
+              delHandler={(e: MouseEvent<HTMLElement>) => deleteHandler(e)}
             />
           );
         })

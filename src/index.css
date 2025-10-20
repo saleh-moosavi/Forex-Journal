@@ -2,20 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 /* change scroll shape */
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-thumb {
-    background-color: rgb(91, 91, 91);
+  background-color: rgb(91, 91, 91);
 }
 
-::-webkit-scrollbar-track{
-    background-color: rgba(255, 255, 255, 0.805);
+::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.805);
 }
 
-*{
-    scroll-behavior: smooth;
+* {
+  scroll-behavior: smooth;
 }
