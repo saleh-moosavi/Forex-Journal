@@ -1,10 +1,13 @@
 import useGetData from "../hooks/useGetData";
 import { dataType } from "../types/dataType";
+import useSetData from "../hooks/useSetData";
 import CardView from "../components/CardView";
+import { deleteItem } from "../utils/deleteItem";
 import { MouseEvent, useEffect, useState } from "react";
 
 export default function Index() {
   const { getAllData } = useGetData();
+  const { setAllData } = useSetData();
   const [data, setData] = useState<dataType[]>([]);
 
   //Get data from localStorage after page loaded
@@ -16,18 +19,16 @@ export default function Index() {
   //delete data from localStorage when you click on delete button
   const deleteHandler = (e: MouseEvent<HTMLElement>) => {
     if (confirm(`Are You Sure ??`)) {
-      const newData = [...data];
-      const target = e.target as HTMLElement;
-      newData.splice(Number(target.dataset.id), 1);
+      const newData = deleteItem(e, data);
       setData(newData);
-      localStorage.setItem("backtest", JSON.stringify(newData));
+      setAllData(newData);
     }
   };
 
-  return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 items-center gap-3 pt-20 px-2">
-      {data.length > 0 ? (
-        data.map((value, index: number) => {
+  if (data.length > 0) {
+    return (
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 items-center gap-3 pt-20 px-2">
+        {data.map((value, index: number) => {
           return (
             <CardView
               key={index}
@@ -36,10 +37,14 @@ export default function Index() {
               delHandler={(e: MouseEvent<HTMLElement>) => deleteHandler(e)}
             />
           );
-        })
-      ) : (
-        <p className="text-rose-300 text-xl font-semibold">nothing to share</p>
-      )}
-    </div>
+        })}
+      </div>
+    );
+  }
+
+  return (
+    <p className="text-3xl text-white font-bold flex justify-center items-center h-full animate-pulse">
+      Nothing To Share
+    </p>
   );
 }

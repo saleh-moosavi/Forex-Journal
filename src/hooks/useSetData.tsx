@@ -8,5 +8,8 @@ export default function useSetData() {
     const newAll = oldData?.length > 0 ? [...oldData, data] : [data];
     localStorage.setItem("backtest", JSON.stringify(newAll));
   };
-  return { setData };
+  const setAllData = (data: dataType[]) => {
+    localStorage.setItem("backtest", JSON.stringify(data));
+  };
+  return { setData, setAllData };
 }
