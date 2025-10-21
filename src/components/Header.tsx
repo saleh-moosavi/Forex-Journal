@@ -1,40 +1,44 @@
 import { Link } from "react-router-dom";
+import useClipboard from "../hooks/useClipboard";
+import { ImCopy, ImHome, ImPlus } from "react-icons/im";
 
 export default function Header() {
-  //Copy Data To Clipboard
-  const copyToClipboard = () => {
-    if (navigator.clipboard) {
-      const data: string | null =
-        localStorage.getItem("backtest") && localStorage.getItem("backtest");
-
-      navigator.clipboard
-        .writeText(data ? data : "")
-        .then(() => {
-          alert("Text copied to clipboard!");
-        })
-        .catch((error) => {
-          console.error("Failed to copy text: ", error);
-        });
-    } else {
-      console.error("Clipboard API not supported");
-    }
-  };
+  const { copyToClipboard } = useClipboard();
 
   return (
-    <div className="text-white p-5 fixed top-0 right-0 left-0 bg-white/20 backdrop-blur-sm">
-      <ul className="flex justify-between px-5 w-full text-sm font-bold">
-        <ul className="flex gap-x-5 hover:*:cursor-pointer">
-          <li>
-            <Link to="/">List</Link>
-          </li>
-          <li>
-            <Link to="/add">Add</Link>
-          </li>
-        </ul>
-        <li className="hover:cursor-pointer" onClick={copyToClipboard}>
+    <div className="w-fit fixed z-50 bottom-5 inset-x-0 mx-auto flex justify-around gap-4 items-center px-4 py-1 bg-gradient-to-t from-[#330055] to-[#000022] rounded-lg shadow shadow-white">
+      <Link
+        to="/"
+        className="blcok relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500"
+      >
+        <ImHome className="fill-white size-5" />
+
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 w-max px-2 py-1 text-white bg-black rounded-md opacity-0 scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
+          Home
+        </div>
+      </Link>
+
+      <Link
+        to="/add"
+        className="relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500"
+      >
+        <ImPlus className="fill-white size-5" />
+
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 w-max px-2 py-1 text-white bg-black rounded-md opacity-0 scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
+          Add
+        </div>
+      </Link>
+
+      <div
+        onClick={copyToClipboard}
+        className="relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500"
+      >
+        <ImCopy className="fill-white size-5" />
+
+        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-max px-2 py-1 text-white bg-black rounded-md opacity-0 transform scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
           Copy Data
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   );
 }

@@ -27,15 +27,17 @@ export default function Index() {
 
   if (data.length > 0) {
     return (
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 items-center gap-3 pt-20 px-2">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 items-center gap-5 p-5 mb-20">
         {data.map((value, index: number) => {
           return (
-            <CardView
-              key={index}
-              id={index.toString()}
-              data={value}
-              delHandler={(e: MouseEvent<HTMLElement>) => deleteHandler(e)}
-            />
+            <>
+              <CardView
+                key={index}
+                id={index.toString()}
+                data={value}
+                delHandler={(e: MouseEvent<HTMLElement>) => deleteHandler(e)}
+              />
+            </>
           );
         })}
       </div>
