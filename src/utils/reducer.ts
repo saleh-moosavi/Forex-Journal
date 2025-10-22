@@ -16,9 +16,9 @@ type Action =
   | { type: "params" | "reset"; value: dataType };
 
 // initial value of state
-export const initialReducer = {
-  currency: "",
-  result: "",
+export const initialReducer: dataType = {
+  currency: "EURUSD",
+  result: "TP",
   date: "",
   time: "",
   desc: "",

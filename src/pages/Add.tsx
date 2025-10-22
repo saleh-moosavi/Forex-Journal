@@ -1,22 +1,21 @@
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import useGetData from "../hooks/useGetData";
-import useSetData from "../hooks/useSetData";
-import useEditData from "../hooks/useEditData";
-import { useNavigate, useParams } from "react-router-dom";
-import { initialReducer, reducer } from "../utils/reducer";
-import { FormEvent, useEffect, useReducer, useState } from "react";
+import { initialReducer } from "../utils/reducer";
+import CustomInput from "../components/CustomInput";
+import CustomOption from "../components/CustomOption";
+import useAddFormSubmit from "../hooks/useAddFormSubmit";
 
 interface useParamsType {
   id?: string | undefined;
 }
 
 export default function Add() {
-  const navigator = useNavigate();
   const { getData } = useGetData();
-  const { setData } = useSetData();
-  const { editData } = useEditData();
-  const [error, setError] = useState(false);
   const params = useParams() as useParamsType;
-  const [data, dispatch] = useReducer(reducer, initialReducer);
+  const { handleData, handleSubmit, dispatch, error, data } = useAddFormSubmit({
+    id: params.id ? params.id : null,
+  });
 
   // check open page for edit or add
   useEffect(() => {
@@ -27,48 +26,6 @@ export default function Add() {
       dispatch({ type: "reset", value: initialReducer });
     }
   }, [params.id]);
-
-  // add data in localStorage after submit
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (
-      data.time != "" &&
-      data.date != "" &&
-      data.htf != "" &&
-      data.mtf != "" &&
-      data.ltf != "" &&
-      data.result != "Result" &&
-      data.currency != "Currency" &&
-      data.desc != ""
-    ) {
-      setError(false);
-      setData(data);
-      navigator("/");
-    } else {
-      setError(true);
-    }
-  };
-
-  // edit data in localStorage after submit
-  const handleData = (e: FormEvent) => {
-    e.preventDefault();
-    if (
-      data.time != "" &&
-      data.date != "" &&
-      data.htf != "" &&
-      data.mtf != "" &&
-      data.ltf != "" &&
-      data.result != "Result" &&
-      data.currency != "Currency" &&
-      data.desc != ""
-    ) {
-      editData(data, params.id!);
-      setError(false);
-      navigator("/");
-    } else {
-      setError(true);
-    }
-  };
 
   return (
     <div className="w-screen h-screen flex justify-center items-center">
@@ -82,75 +39,61 @@ export default function Add() {
           </p>
         )}
         {/* Result and Currency inputs */}
-        <div className="flex gap-x-2 w-full">
-          <select
-            className="p-2 rounded-md w-1/2 shrink-0"
+        <div className="grid grid-cols-2 gap-2 w-full">
+          <CustomOption
+            title="Result"
             value={data.result}
-            onChange={(e) =>
+            options={["TP", "SL"]}
+            onChangeHandler={(e) =>
               dispatch({ type: "result", value: e.target.value })
             }
-          >
-            <option value="Result">Result</option>
-            <option value="TP">TP</option>
-            <option value="SL">SL</option>
-          </select>
-
-          <select
-            className="p-2 rounded-md w-1/2 shrink-0"
+          />
+          <CustomOption
+            title="Currency"
             value={data.currency}
-            onChange={(e) =>
+            options={["EURUSD", "XAUUSD"]}
+            onChangeHandler={(e) =>
               dispatch({ type: "currency", value: e.target.value })
             }
-          >
-            <option value="Currency">Currency</option>
-            <option value="EURUSD">EURUSD</option>
-            <option value="XAUUSD">XAUUSD</option>
-          </select>
-        </div>
-        {/* time and date inputs */}
-        <div className="flex gap-x-2 w-full">
-          <input
-            className="p-2 rounded-md w-1/2 shrink-0"
+          />
+          {/* time and date inputs */}
+          <CustomInput
             type="date"
             value={data.date}
-            onChange={(e) => {
+            changeHandler={(e) => {
               dispatch({ type: "date", value: e.target.value });
             }}
           />
-          <input
-            className="p-2 rounded-md w-1/2 shrink-0"
+          <CustomInput
             type="time"
             value={data.time}
-            onChange={(e) => {
+            changeHandler={(e) => {
               dispatch({ type: "time", value: e.target.value });
             }}
           />
         </div>
         {/* images and labels input */}
-        <label className="text-white font-semibold">HTF image</label>
-        <input
-          className="p-2 rounded-md"
+        <CustomInput
           type="url"
+          label="HTF Image"
           value={data.htf}
-          onChange={(e) => {
+          changeHandler={(e) => {
             dispatch({ type: "htf", value: e.target.value });
           }}
         />
-        <label className="text-white font-semibold">MTF image</label>
-        <input
-          className="p-2 rounded-md"
+        <CustomInput
           type="url"
+          label="MTF Image"
           value={data.mtf}
-          onChange={(e) => {
+          changeHandler={(e) => {
             dispatch({ type: "mtf", value: e.target.value });
           }}
         />
-        <label className="text-white font-semibold">LTF image</label>
-        <input
-          className="p-2 rounded-md"
+        <CustomInput
           type="url"
+          label="LTF Image"
           value={data.ltf}
-          onChange={(e) => {
+          changeHandler={(e) => {
             dispatch({ type: "ltf", value: e.target.value });
           }}
         />
