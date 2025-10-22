@@ -3,7 +3,7 @@ import { dataType } from "../types/dataType";
 import useSetData from "../hooks/useSetData";
 import CardView from "../components/CardView";
 import { deleteItem } from "../utils/deleteItem";
-import { MouseEvent, useEffect, useState } from "react";
+import { Fragment, MouseEvent, useEffect, useState } from "react";
 
 export default function Index() {
   const { getAllData } = useGetData();
@@ -30,14 +30,14 @@ export default function Index() {
       <div className="grid md:grid-cols-2 lg:grid-cols-4 items-center gap-5 p-5 mb-20">
         {data.map((value, index: number) => {
           return (
-            <>
+            <Fragment key={index}>
               <CardView
                 key={index}
                 id={index.toString()}
                 data={value}
                 delHandler={(e: MouseEvent<HTMLElement>) => deleteHandler(e)}
               />
-            </>
+            </Fragment>
           );
         })}
       </div>

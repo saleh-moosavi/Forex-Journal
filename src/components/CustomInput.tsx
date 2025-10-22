@@ -12,7 +12,7 @@ export default function CustomInput({
   return (
     <>
       <input
-        className="p-2 rounded-md shrink-0 w-full"
+        className="p-2 rounded-md shrink-0 w-full bg-white/20 text-white"
         placeholder={label ? `${label} Image URL` : ""}
         type={type}
         value={value}
