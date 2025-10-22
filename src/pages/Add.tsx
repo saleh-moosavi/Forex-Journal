@@ -13,7 +13,7 @@ interface useParamsType {
 export default function Add() {
   const { getData } = useGetData();
   const params = useParams() as useParamsType;
-  const { handleData, handleSubmit, dispatch, error, data } = useAddFormSubmit({
+  const { handleSubmit, dispatch, error, data } = useAddFormSubmit({
     id: params.id ? params.id : null,
   });
 
@@ -30,8 +30,8 @@ export default function Add() {
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <form
-        onSubmit={(e) => (params.id ? handleData(e) : handleSubmit(e))}
-        className="flex flex-col w-1/2 lg:w-1/3 gap-y-1 text-xs p-5 backdrop-blur-sm bg-white/20 rounded-lg shadow-white/40 shadow-md"
+        onSubmit={handleSubmit}
+        className="flex flex-col w-1/2 lg:w-1/3 gap-y-2 text-xs p-5 backdrop-blur-sm bg-white/20 rounded-lg shadow-white/40 shadow-md"
       >
         {error && (
           <p className="text-rose-500 font-bold text-lg text-center mb-3">
@@ -75,7 +75,7 @@ export default function Add() {
         {/* images and labels input */}
         <CustomInput
           type="url"
-          label="HTF Image"
+          label="HTF"
           value={data.htf}
           changeHandler={(e) => {
             dispatch({ type: "htf", value: e.target.value });
@@ -83,7 +83,7 @@ export default function Add() {
         />
         <CustomInput
           type="url"
-          label="MTF Image"
+          label="MTF"
           value={data.mtf}
           changeHandler={(e) => {
             dispatch({ type: "mtf", value: e.target.value });
@@ -91,18 +91,18 @@ export default function Add() {
         />
         <CustomInput
           type="url"
-          label="LTF Image"
+          label="LTF"
           value={data.ltf}
           changeHandler={(e) => {
             dispatch({ type: "ltf", value: e.target.value });
           }}
         />
         {/* textarea input */}
-        <label className="text-white font-semibold">Description</label>
         <textarea
           className="p-2 rounded-md"
-          rows={6}
+          rows={3}
           value={data.desc}
+          placeholder="Description"
           onChange={(e) => {
             dispatch({ type: "desc", value: e.target.value });
           }}

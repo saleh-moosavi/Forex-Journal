@@ -11,14 +11,12 @@ export default function CustomInput({
 }) {
   return (
     <>
-      {label && <label className="text-white font-semibold">{label}</label>}
       <input
         className="p-2 rounded-md shrink-0 w-full"
+        placeholder={label ? `${label} Image URL` : ""}
         type={type}
         value={value}
-        onChange={() => {
-          changeHandler;
-        }}
+        onChange={changeHandler}
       />
     </>
   );

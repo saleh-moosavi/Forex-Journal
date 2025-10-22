@@ -3,6 +3,7 @@ import useEditData from "../hooks/useEditData";
 import { useNavigate } from "react-router-dom";
 import { FormEvent, useReducer, useState } from "react";
 import { initialReducer, reducer } from "../utils/reducer";
+import { addFormValidator } from "../utils/AddFormValidator";
 
 export default function useAddFormSubmit({ id }: { id: string | null }) {
   const navigator = useNavigate();
@@ -11,46 +12,18 @@ export default function useAddFormSubmit({ id }: { id: string | null }) {
   const [error, setError] = useState(false);
   const [data, dispatch] = useReducer(reducer, initialReducer);
 
-  // add data in localStorage after submit
+  // add or edit data in localStorage after submit
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (
-      data.time != "" &&
-      data.date != "" &&
-      data.htf != "" &&
-      data.mtf != "" &&
-      data.ltf != "" &&
-      data.result != "Result" &&
-      data.currency != "Currency" &&
-      data.desc != ""
-    ) {
+    const isValid = addFormValidator(data);
+    if (isValid) {
+      id !== null ? editData(data, id) : setData(data);
       setError(false);
-      setData(data);
       navigator("/");
     } else {
       setError(true);
     }
   };
 
-  // edit data in localStorage after submit
-  const handleData = (e: FormEvent) => {
-    e.preventDefault();
-    if (
-      data.time != "" &&
-      data.date != "" &&
-      data.htf != "" &&
-      data.mtf != "" &&
-      data.ltf != "" &&
-      data.result != "Result" &&
-      data.currency != "Currency" &&
-      data.desc != ""
-    ) {
-      editData(data, id!);
-      setError(false);
-      navigator("/");
-    } else {
-      setError(true);
-    }
-  };
-  return { handleSubmit, handleData, data, error, dispatch };
+  return { handleSubmit, data, error, dispatch };
 }

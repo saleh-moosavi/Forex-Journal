@@ -1,33 +1,22 @@
-import { dataType } from "../types/dataType";
-
-type Action =
-  | {
-      type:
-        | "htf"
-        | "mtf"
-        | "ltf"
-        | "result"
-        | "currency"
-        | "desc"
-        | "time"
-        | "date";
-      value: string;
-    }
-  | { type: "params" | "reset"; value: dataType };
+import { dataType, reducerAction } from "../types/dataType";
 
 // initial value of state
 export const initialReducer: dataType = {
   currency: "EURUSD",
   result: "TP",
-  date: "",
-  time: "",
+  date: new Date().toISOString().split("T")[0],
+  time: new Date().toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }),
   desc: "",
   htf: "",
   mtf: "",
   ltf: "",
 };
 
-export const reducer = (state: dataType, action: Action): dataType => {
+export const reducer = (state: dataType, action: reducerAction): dataType => {
   switch (action.type) {
     case "htf":
     case "mtf":

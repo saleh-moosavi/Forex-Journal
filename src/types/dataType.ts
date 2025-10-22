@@ -1,6 +1,6 @@
 export interface dataType {
-  currency: string;
-  result: string;
+  currency: "EURUSD" | "XAUUSD";
+  result: "TP" | "SL";
   date: string;
   time: string;
   desc: string;
@@ -8,3 +8,18 @@ export interface dataType {
   mtf: string;
   ltf: string;
 }
+
+export type reducerAction =
+  | {
+      type:
+        | "htf"
+        | "mtf"
+        | "ltf"
+        | "result"
+        | "currency"
+        | "desc"
+        | "time"
+        | "date";
+      value: string;
+    }
+  | { type: "params" | "reset"; value: dataType };
