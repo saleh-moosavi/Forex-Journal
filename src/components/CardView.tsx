@@ -14,7 +14,7 @@ export default function CardView({
 }) {
   return (
     <section className="bg-gradient-to-r from-blue-600 to-violet-600 p-0.5 rounded-lg hover:shadow-lg hover:shadow-sky-500/40 transition-all duration-300">
-      <div className="bg-slate-900 rounded-lg overflow-hidden grid relative">
+      <div className="bg-gradient-to-t from-[#000022] to-[#330055] rounded-lg overflow-hidden grid relative">
         <CardImage htf={data.htf} mtf={data.mtf} ltf={data.ltf} />
         <article className="flex justify-between gap-2 p-2 text-sm font-semibold text-center text-white">
           <section className="grid items-start gap-2 shrink-0">

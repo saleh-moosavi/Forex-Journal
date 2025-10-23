@@ -14,28 +14,13 @@ export default function CardImage({
     <>
       <img
         src={currentImg}
-        className="bg-gray-400 w-full aspect-video object-cover"
+        className="bg-white/30 w-full aspect-video object-cover text-white text-center"
         alt="Image"
       />
-      <article className="w-full grid grid-cols-3 gap-2 p-2 *:cursor-pointer *:rounded-lg">
-        <img
-          src={htf}
-          onClick={() => setCurrentImg(htf)}
-          className="bg-gray-400"
-          alt="Image"
-        />
-        <img
-          src={mtf}
-          onClick={() => setCurrentImg(mtf)}
-          className="bg-gray-400"
-          alt="Image"
-        />
-        <img
-          src={ltf}
-          onClick={() => setCurrentImg(ltf)}
-          className="bg-gray-400"
-          alt="Image"
-        />
+      <article className="w-full *:h-full object-cover grid grid-cols-3 gap-2 p-2 *:cursor-pointer *:rounded-lg min-h-[88px] *:bg-white/30 *:text-white *:text-center">
+        <img src={htf} onClick={() => setCurrentImg(htf)} alt="Image" />
+        <img src={mtf} onClick={() => setCurrentImg(mtf)} alt="Image" />
+        <img src={ltf} onClick={() => setCurrentImg(ltf)} alt="Image" />
       </article>
     </>
   );

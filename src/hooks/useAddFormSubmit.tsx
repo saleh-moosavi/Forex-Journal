@@ -4,24 +4,24 @@ import { useNavigate } from "react-router-dom";
 import { FormEvent, useReducer, useState } from "react";
 import { initialReducer, reducer } from "../utils/reducer";
 import { addFormValidator } from "../utils/AddFormValidator";
+import { errorType } from "../types/dataType";
 
 export default function useAddFormSubmit({ id }: { id: string | null }) {
-  const navigator = useNavigate();
+  const navigate = useNavigate();
   const { setData } = useSetData();
   const { editData } = useEditData();
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<errorType>({});
   const [data, dispatch] = useReducer(reducer, initialReducer);
 
   // add or edit data in localStorage after submit
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const isValid = addFormValidator(data);
-    if (isValid) {
+    const response = addFormValidator(data);
+    if (response.isValid) {
       id !== null ? editData(data, id) : setData(data);
-      setError(false);
-      navigator("/");
+      navigate("/");
     } else {
-      setError(true);
+      setError(response.error);
     }
   };
 

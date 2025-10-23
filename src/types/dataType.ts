@@ -23,3 +23,14 @@ export type reducerAction =
       value: string;
     }
   | { type: "params" | "reset"; value: dataType };
+
+export interface errorType {
+  htf?: string;
+  mtf?: string;
+  ltf?: string;
+  time?: string;
+  date?: string;
+  desc?: string;
+  result?: string;
+  currency?: string;
+}

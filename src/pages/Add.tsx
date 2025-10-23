@@ -34,11 +34,12 @@ export default function Add() {
         className="flex flex-col w-1/2 lg:w-1/3 gap-y-2 text-xs md:text-sm p-5 backdrop-blur-md rounded-xl shadow shadow-white"
       >
         <h2 className="text-center text-white text-xl font-bold mb-5">
-          Add New Trade Jurnal
+          Add New Trade Journal
         </h2>
         {/* Result and Currency inputs */}
         <div className="grid grid-cols-2 gap-2 w-full">
           <CustomOption
+            error={error.result}
             title="Result"
             value={data.result}
             options={["TP", "SL"]}
@@ -47,6 +48,7 @@ export default function Add() {
             }
           />
           <CustomOption
+            error={error?.currency}
             title="Currency"
             value={data.currency}
             options={["EURUSD", "XAUUSD"]}
@@ -56,6 +58,7 @@ export default function Add() {
           />
           {/* time and date inputs */}
           <CustomInput
+            error={error.date}
             type="date"
             value={data.date}
             changeHandler={(e) => {
@@ -63,6 +66,7 @@ export default function Add() {
             }}
           />
           <CustomInput
+            error={error.time}
             type="time"
             value={data.time}
             changeHandler={(e) => {
@@ -72,6 +76,7 @@ export default function Add() {
         </div>
         {/* images and labels input */}
         <CustomInput
+          error={error.htf}
           type="url"
           label="HTF"
           value={data.htf}
@@ -80,6 +85,7 @@ export default function Add() {
           }}
         />
         <CustomInput
+          error={error.mtf}
           type="url"
           label="MTF"
           value={data.mtf}
@@ -88,6 +94,7 @@ export default function Add() {
           }}
         />
         <CustomInput
+          error={error.ltf}
           type="url"
           label="LTF"
           value={data.ltf}
@@ -96,26 +103,26 @@ export default function Add() {
           }}
         />
         {/* textarea input */}
-        <textarea
-          className="p-2 rounded-md bg-white/20 text-white"
-          rows={3}
-          value={data.desc}
-          placeholder="Description"
-          onChange={(e) => {
-            dispatch({ type: "desc", value: e.target.value });
-          }}
-        ></textarea>
+        <article>
+          <textarea
+            className="p-2 w-full rounded-md bg-white/20 text-white"
+            rows={3}
+            value={data.desc}
+            placeholder="Description"
+            onChange={(e) => {
+              dispatch({ type: "desc", value: e.target.value });
+            }}
+          ></textarea>
+
+          {error.desc && <p className="text-rose-400 text-xs">{error.desc}</p>}
+        </article>
+
         <button
           type="submit"
           className="p-2 w-full font-bold text-base text-white bg-gradient-to-r from-blue-700 to-purple-700 hover:translate-y-1 transition-all duration-300 rounded-md"
         >
           {params.id ? "Edit" : "Add"}
         </button>
-        {error && (
-          <p className="text-rose-400 font-bold text-center">
-            Please Complete All Fields
-          </p>
-        )}
       </form>
     </div>
   );
