@@ -1,5 +1,6 @@
-import { useCallback } from "react";
 import useGetData from "./useGetData";
+import toastContext from "../context/Toast";
+import { useCallback, useContext } from "react";
 
 interface UseClipboardReturn {
   copyToClipboard: () => Promise<void>;
@@ -7,6 +8,7 @@ interface UseClipboardReturn {
 }
 
 export default function useClipboard(): UseClipboardReturn {
+  const { setToast } = useContext(toastContext);
   const { getAllData } = useGetData();
   const isSupported = Boolean(
     typeof navigator !== "undefined" && navigator.clipboard?.writeText
@@ -14,7 +16,11 @@ export default function useClipboard(): UseClipboardReturn {
 
   const copyToClipboard = useCallback(async (): Promise<void> => {
     if (!isSupported) {
-      alert("Clipboard API not supported in this browser!");
+      setToast({
+        isVisible: true,
+        color: "bg-rose-500",
+        text: "Clipboard API not supported in this browser!",
+      });
       return;
     }
 
@@ -22,9 +28,17 @@ export default function useClipboard(): UseClipboardReturn {
       const data = JSON.stringify(getAllData());
       await navigator.clipboard.writeText(data);
 
-      alert("Text copied to clipboard!");
+      setToast({
+        isVisible: true,
+        color: "bg-blue-600",
+        text: "Text copied to clipboard",
+      });
     } catch (error) {
-      alert("Failed to copy text to clipboard:");
+      setToast({
+        isVisible: true,
+        color: "bg-rose-500",
+        text: "Failed to copy text to clipboard!",
+      });
       return;
     }
   }, [isSupported]);

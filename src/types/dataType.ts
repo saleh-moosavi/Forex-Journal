@@ -34,3 +34,17 @@ export interface errorType {
   result?: string;
   currency?: string;
 }
+
+export interface ToastState {
+  isVisible: boolean;
+  text: string;
+  color: "bg-rose-500" | "bg-blue-600";
+}
+
+export type SetToastType = React.Dispatch<
+  React.SetStateAction<{
+    isVisible: boolean;
+    text: string;
+    color: "bg-rose-500" | "bg-blue-600";
+  }>
+>;
