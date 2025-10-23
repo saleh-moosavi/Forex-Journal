@@ -5,6 +5,7 @@ import { ToastState } from "./types/dataType";
 import AnimateBG from "./components/AnimateBG";
 import { lazy, Suspense, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Loading from "./components/Loading";
 
 const Add = lazy(() => import("./pages/Add"));
 const Index = lazy(() => import("./pages/Index"));
@@ -27,7 +28,7 @@ function App() {
         <AnimateBG />
         <BrowserRouter>
           <Header />
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading />}>
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/add" element={<Add />} />

@@ -27,7 +27,7 @@ export default function Index() {
 
   if (data.length > 0) {
     return (
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 items-center gap-5 p-5 mb-20">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center gap-5 p-5 mb-20">
         {data.map((value, index: number) => {
           return (
             <Fragment key={index}>
