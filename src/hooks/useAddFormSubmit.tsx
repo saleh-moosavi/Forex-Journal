@@ -1,7 +1,6 @@
+import useData from "./useData";
 import toastContext from "../context/Toast";
-import useSetData from "../hooks/useSetData";
 import { errorType } from "../types/dataType";
-import useEditData from "../hooks/useEditData";
 import { useNavigate } from "react-router-dom";
 import { initialReducer, reducer } from "../utils/reducer";
 import { addFormValidator } from "../utils/AddFormValidator";
@@ -9,8 +8,7 @@ import { FormEvent, useContext, useReducer, useState } from "react";
 
 export default function useAddFormSubmit({ id }: { id: number | null }) {
   const navigate = useNavigate();
-  const { setData } = useSetData();
-  const { editData } = useEditData();
+  const { setData, editData } = useData();
   const { setToast } = useContext(toastContext);
   const [error, setError] = useState<errorType>({});
   const [data, dispatch] = useReducer(reducer, initialReducer);

@@ -1,4 +1,4 @@
-import useGetData from "./useGetData";
+import useGetData from "./useData";
 import toastContext from "../context/Toast";
 import { useCallback, useContext } from "react";
 

@@ -17,7 +17,7 @@ export default function Toast() {
   return (
     <div
       className={`
-        fixed inset-x-0 w-fit top-5 mx-auto px-4 py-2 rounded-lg text-white
+        fixed inset-x-0 w-fit top-5 mx-auto px-4 py-2 rounded-lg text-white z-50 shadow-md shadow-white/20
         ${
           toast.isVisible
             ? "translate-y-0 opacity-100"

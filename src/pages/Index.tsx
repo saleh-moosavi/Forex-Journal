@@ -1,10 +1,10 @@
-import useGetData from "../hooks/useGetData";
+import useData from "../hooks/useData";
 import { dataType } from "../types/dataType";
 import CardView from "../components/CardView";
 import { Fragment, useEffect, useState } from "react";
 
 export default function Index() {
-  const { getAllData } = useGetData();
+  const { getAllData } = useData();
   const [data, setData] = useState<dataType[]>([]);
 
   //Get data from localStorage after page loaded

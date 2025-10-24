@@ -1,6 +1,6 @@
 import { useEffect } from "react";
+import useData from "../hooks/useData";
 import { useParams } from "react-router-dom";
-import useGetData from "../hooks/useGetData";
 import { initialReducer } from "../utils/reducer";
 import CustomInput from "../components/CustomInput";
 import CustomOption from "../components/CustomOption";
@@ -11,7 +11,7 @@ interface useParamsType {
 }
 
 export default function Add() {
-  const { getData } = useGetData();
+  const { getData } = useData();
   const params = useParams() as useParamsType;
   const { handleSubmit, dispatch, error, data } = useAddFormSubmit({
     id: params.id ? parseInt(params.id) : null,

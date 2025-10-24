@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { deleteItem } from "../utils/deleteItem";
+import useData from "../hooks/useData";
 
 export function DeleteButton({ id }: { id: number }) {
+  const { deleteData } = useData();
   const deleteHandler = () => {
     if (confirm(`Are You Sure ??`)) {
-      deleteItem(id);
+      deleteData(id);
     }
   };
   return (
