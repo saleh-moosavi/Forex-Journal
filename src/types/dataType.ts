@@ -4,34 +4,23 @@ export interface dataType {
   date: string;
   time: string;
   desc: string;
-  htf: string;
-  mtf: string;
-  ltf: string;
+  images: Blob[];
   id?: number;
 }
 
 export type reducerAction =
   | {
-      type:
-        | "htf"
-        | "mtf"
-        | "ltf"
-        | "result"
-        | "currency"
-        | "desc"
-        | "time"
-        | "date";
+      type: "result" | "currency" | "desc" | "time" | "date";
       value: string;
     }
-  | { type: "params" | "reset"; value: dataType };
+  | { type: "params" | "reset"; value: dataType }
+  | { type: "image" | "reset"; value: FileList | null };
 
 export interface errorType {
-  htf?: string;
-  mtf?: string;
-  ltf?: string;
-  time?: string;
   date?: string;
   desc?: string;
+  time?: string;
+  image?: string;
   result?: string;
   currency?: string;
 }

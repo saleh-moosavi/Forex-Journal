@@ -1,4 +1,4 @@
-import useGetData from "./useData";
+import useData from "./useData";
 import toastContext from "../context/Toast";
 import { useCallback, useContext } from "react";
 
@@ -9,7 +9,7 @@ interface UseClipboardReturn {
 
 export default function useClipboard(): UseClipboardReturn {
   const { setToast } = useContext(toastContext);
-  const { getAllData } = useGetData();
+  const { getAllData } = useData();
   const isSupported = Boolean(
     typeof navigator !== "undefined" && navigator.clipboard?.writeText
   );

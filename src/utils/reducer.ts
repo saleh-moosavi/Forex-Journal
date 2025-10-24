@@ -11,16 +11,11 @@ export const initialReducer: dataType = {
     hour12: false,
   }),
   desc: "",
-  htf: "",
-  mtf: "",
-  ltf: "",
+  images: [],
 };
 
 export const reducer = (state: dataType, action: reducerAction): dataType => {
   switch (action.type) {
-    case "htf":
-    case "mtf":
-    case "ltf":
     case "result":
     case "currency":
     case "desc":
@@ -28,6 +23,8 @@ export const reducer = (state: dataType, action: reducerAction): dataType => {
     case "date":
       return { ...state, [action.type]: action.value as string };
 
+    case "image":
+      return { ...state, images: Array.from(action.value as FileList) };
     case "params":
     case "reset":
       return {

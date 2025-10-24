@@ -7,9 +7,7 @@ export function addFormValidator(data: dataType) {
   if (!data.date.match(/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/))
     error["date"] = "Date Is Not Valid";
   // images
-  if (data.mtf.trim() === "") error["mtf"] = "Image High Time Frame Required";
-  if (data.htf.trim() === "") error["htf"] = "Image Mid Time Frame Required";
-  if (data.ltf.trim() === "") error["ltf"] = "Image Low Time Frame Required";
+  if (data.images.length === 0) error["image"] = "Image Required";
 
   if (data.result !== "SL" && data.result !== "TP")
     error["result"] = "Result is Not Valid";

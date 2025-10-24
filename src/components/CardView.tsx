@@ -6,7 +6,7 @@ export default function CardView({ data }: { data: dataType }) {
   return (
     <section className="bg-gradient-to-r from-blue-600 to-violet-600 p-0.5 rounded-lg hover:shadow-lg hover:shadow-sky-500/40 transition-all duration-300">
       <div className="bg-gradient-to-t from-[#000022] to-[#330055] rounded-lg overflow-hidden grid relative">
-        <CardImage htf={data.htf} mtf={data.mtf} ltf={data.ltf} />
+        <CardImage images={data.images} />
         <article className="flex justify-between gap-2 p-2 text-sm font-semibold text-center text-white">
           <section className="grid items-start gap-2 shrink-0">
             <p className="bg-blue-600 py-1 px-2 rounded-md">{data.currency}</p>

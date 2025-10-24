@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import useData from "../hooks/useData";
 import { useParams } from "react-router-dom";
 import { initialReducer } from "../utils/reducer";
+import ImageInput from "../components/ImageInput";
 import CustomInput from "../components/CustomInput";
 import CustomOption from "../components/CustomOption";
 import useAddFormSubmit from "../hooks/useAddFormSubmit";
@@ -76,31 +77,11 @@ export default function Add() {
           />
         </div>
         {/* images and labels input */}
-        <CustomInput
-          error={error.htf}
-          type="url"
-          label="HTF"
-          value={data.htf}
-          changeHandler={(e) => {
-            dispatch({ type: "htf", value: e.target.value });
-          }}
-        />
-        <CustomInput
-          error={error.mtf}
-          type="url"
-          label="MTF"
-          value={data.mtf}
-          changeHandler={(e) => {
-            dispatch({ type: "mtf", value: e.target.value });
-          }}
-        />
-        <CustomInput
-          error={error.ltf}
-          type="url"
-          label="LTF"
-          value={data.ltf}
-          changeHandler={(e) => {
-            dispatch({ type: "ltf", value: e.target.value });
+        <ImageInput
+          error={error.image}
+          value={data.images}
+          changeHandler={(file) => {
+            dispatch({ type: "image", value: file });
           }}
         />
         {/* textarea input */}
