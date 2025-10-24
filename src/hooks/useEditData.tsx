@@ -1,10 +1,12 @@
 import { dataType } from "../types/dataType";
+import { openDB, getStore } from "../utils/indexedDB";
 
 export default function useEditData() {
-  const editData = (data: dataType, id: string) => {
-    const all: object[] = JSON.parse(localStorage.getItem("backtest") || "");
-    all.splice(Number(id), 1, data);
-    localStorage.setItem("backtest", JSON.stringify(all));
+  const editData = async (id: number, data: dataType) => {
+    const db = await openDB();
+    const store = getStore(db, "readwrite");
+    const updated = { ...data, id };
+    store.put(updated);
   };
   return { editData };
 }

@@ -1,11 +1,7 @@
-import { MouseEvent } from "react";
-import { dataType } from "../types/dataType";
+import { openDB, getStore } from "../utils/indexedDB";
 
-export const deleteItem = (
-  e: MouseEvent<HTMLElement>,
-  data: dataType[]
-): dataType[] => {
-  const newData = [...data];
-  newData.splice(Number((e.target as HTMLElement).dataset.id), 1);
-  return newData;
+export const deleteItem = async (id: number) => {
+  const db = await openDB();
+  const store = getStore(db, "readwrite");
+  store.delete(id);
 };

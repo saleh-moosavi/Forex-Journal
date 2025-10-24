@@ -1,11 +1,12 @@
 import Toast from "./components/Toast";
 import Header from "./components/Header";
+import { openDB } from "./utils/indexedDB";
 import toastContext from "./context/Toast";
+import Loading from "./components/Loading";
 import { ToastState } from "./types/dataType";
 import AnimateBG from "./components/AnimateBG";
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Loading from "./components/Loading";
 
 const Add = lazy(() => import("./pages/Add"));
 const Index = lazy(() => import("./pages/Index"));
@@ -16,6 +17,10 @@ function App() {
     text: "",
     color: "bg-blue-600",
   });
+  useEffect(() => {
+    openDB();
+  }, []);
+
   return (
     <toastContext.Provider
       value={{

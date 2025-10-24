@@ -25,7 +25,7 @@ export default function useClipboard(): UseClipboardReturn {
     }
 
     try {
-      const data = JSON.stringify(getAllData());
+      const data = JSON.stringify(await getAllData());
       await navigator.clipboard.writeText(data);
 
       setToast({

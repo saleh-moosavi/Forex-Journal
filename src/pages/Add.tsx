@@ -14,14 +14,15 @@ export default function Add() {
   const { getData } = useGetData();
   const params = useParams() as useParamsType;
   const { handleSubmit, dispatch, error, data } = useAddFormSubmit({
-    id: params.id ? params.id : null,
+    id: params.id ? parseInt(params.id) : null,
   });
 
   // check open page for edit or add
   useEffect(() => {
     if (params.id) {
-      const data = getData(params.id);
-      dispatch({ type: "params", value: data || initialReducer });
+      getData(parseInt(params.id)).then((data) => {
+        dispatch({ type: "params", value: data || initialReducer });
+      });
     } else {
       dispatch({ type: "reset", value: initialReducer });
     }

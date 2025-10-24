@@ -7,6 +7,7 @@ export interface dataType {
   htf: string;
   mtf: string;
   ltf: string;
+  id?: number;
 }
 
 export type reducerAction =

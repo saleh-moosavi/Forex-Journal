@@ -1,24 +1,24 @@
 import { Link } from "react-router-dom";
+import { deleteItem } from "../utils/deleteItem";
 
-export function DeleteButton({
-  id,
-  delHandler,
-}: {
-  id: string;
-  delHandler: (e: React.MouseEvent<HTMLElement>) => void;
-}) {
+export function DeleteButton({ id }: { id: number }) {
+  const deleteHandler = () => {
+    if (confirm(`Are You Sure ??`)) {
+      deleteItem(id);
+    }
+  };
   return (
     <button
       className="bg-rose-700 hover:bg-rose-500 px-4 py-2 rounded-md transition-all duration-300"
       data-id={id}
-      onClick={delHandler}
+      onClick={deleteHandler}
     >
       Delete
     </button>
   );
 }
 
-export function EditButton({ id }: { id: string }) {
+export function EditButton({ id }: { id: number }) {
   return (
     <Link
       className="bg-purple-700 hover:bg-purple-500 px-4 py-2 rounded-md transition-all duration-300"

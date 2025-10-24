@@ -1,17 +1,8 @@
-import { MouseEvent } from "react";
 import CardImage from "./CardImage";
 import { dataType } from "../types/dataType";
 import { DeleteButton, EditButton } from "./CustomButton";
 
-export default function CardView({
-  id,
-  data,
-  delHandler,
-}: {
-  id: string;
-  data: dataType;
-  delHandler: (e: MouseEvent<HTMLElement>) => void;
-}) {
+export default function CardView({ data }: { data: dataType }) {
   return (
     <section className="bg-gradient-to-r from-blue-600 to-violet-600 p-0.5 rounded-lg hover:shadow-lg hover:shadow-sky-500/40 transition-all duration-300">
       <div className="bg-gradient-to-t from-[#000022] to-[#330055] rounded-lg overflow-hidden grid relative">
@@ -36,8 +27,8 @@ export default function CardView({
             )}
           </div>
           <article className="h-full flex flex-col justify-between gap-2 text-white">
-            <DeleteButton delHandler={delHandler} id={id} />
-            <EditButton id={id} />
+            <DeleteButton id={data.id!} />
+            <EditButton id={data.id!} />
           </article>
         </article>
       </div>

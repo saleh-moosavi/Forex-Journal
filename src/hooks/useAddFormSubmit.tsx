@@ -7,7 +7,7 @@ import { initialReducer, reducer } from "../utils/reducer";
 import { addFormValidator } from "../utils/AddFormValidator";
 import { FormEvent, useContext, useReducer, useState } from "react";
 
-export default function useAddFormSubmit({ id }: { id: string | null }) {
+export default function useAddFormSubmit({ id }: { id: number | null }) {
   const navigate = useNavigate();
   const { setData } = useSetData();
   const { editData } = useEditData();
@@ -20,7 +20,7 @@ export default function useAddFormSubmit({ id }: { id: string | null }) {
     e.preventDefault();
     const response = addFormValidator(data);
     if (response.isValid) {
-      id !== null ? editData(data, id) : setData(data);
+      id !== null ? editData(id, data) : setData(data);
       setToast({
         isVisible: true,
         text: `Item ${id !== null ? "Editted" : "Added"} Successfully`,
