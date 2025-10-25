@@ -38,3 +38,11 @@ export type SetToastType = React.Dispatch<
     color: "bg-rose-500" | "bg-blue-600";
   }>
 >;
+
+export interface CustomOptionProps {
+  error?: string;
+  title: string;
+  value: string;
+  options?: string[];
+  onChangeHandler: (value: string) => void;
+}

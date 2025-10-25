@@ -45,18 +45,18 @@ export default function Add() {
             title="Result"
             value={data.result}
             options={["TP", "SL"]}
-            onChangeHandler={(e) =>
-              dispatch({ type: "result", value: e.target.value })
-            }
+            onChangeHandler={(value) => {
+              dispatch({ type: "result", value });
+            }}
           />
           <CustomOption
             error={error?.currency}
             title="Currency"
             value={data.currency}
             options={["EURUSD", "XAUUSD"]}
-            onChangeHandler={(e) =>
-              dispatch({ type: "currency", value: e.target.value })
-            }
+            onChangeHandler={(value) => {
+              dispatch({ type: "currency", value });
+            }}
           />
           {/* time and date inputs */}
           <CustomInput
