@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import InstallPWAButton from "./PwaButton";
 import useClipboard from "../hooks/useClipboard";
 import { ImCopy, ImHome, ImPlus } from "react-icons/im";
 
@@ -39,6 +40,7 @@ export default function Header() {
           Copy Data
         </div>
       </div>
+      <InstallPWAButton />
     </div>
   );
 }
