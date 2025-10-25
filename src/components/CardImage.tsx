@@ -1,21 +1,36 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function CardImage({ images }: { images: Blob[] }) {
   const [currentImg, setCurrentImg] = useState(0);
+
+  const imageUrls = useMemo(() => {
+    if (!images?.length) return [];
+    const urls = images.map((blob) => URL.createObjectURL(blob));
+    return urls;
+  }, [images]);
+
+  useEffect(() => {
+    return () => {
+      imageUrls.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [imageUrls]);
+
   return (
     <>
       <img
-        src={URL.createObjectURL(images[currentImg])}
+        src={imageUrls[currentImg]}
         className="bg-white/30 w-full aspect-video object-cover text-white text-center"
         alt="Image"
       />
       <article className="image-slider w-full *:h-full object-cover flex items-center overflow-x-scroll gap-2 p-2 *:cursor-pointer *:rounded-lg min-h-[88px] *:bg-white/30 *:text-white *:text-center">
-        {images.map((blob: Blob, i: number) => (
+        {imageUrls.map((url: string, i: number) => (
           <img
             key={i}
-            onClick={() => setCurrentImg(i)}
-            src={URL.createObjectURL(blob)}
+            src={url}
+            loading="lazy"
+            decoding="async"
             alt={`Preview image ${i}`}
+            onClick={() => setCurrentImg(i)}
             className="rounded-md object-cover w-2/5"
           />
         ))}

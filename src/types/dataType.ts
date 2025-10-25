@@ -46,3 +46,16 @@ export interface CustomOptionProps {
   options?: string[];
   onChangeHandler: (value: string) => void;
 }
+
+export interface CustomInputProps {
+  type: string;
+  error?: string;
+  value: string;
+  changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface ImageInputProps {
+  value: Blob[];
+  error?: string;
+  changeHandler: (files: FileList | null) => void;
+}
