@@ -54,7 +54,7 @@ export default function ImageInput({
               key={i}
               src={url}
               loading="lazy"
-              className="rounded-md"
+              className="rounded-md max-h-[75px] h-full object-cover w-full"
               alt={`Preview image ${i}`}
             />
           ))}

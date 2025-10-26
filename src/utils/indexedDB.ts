@@ -28,3 +28,8 @@ export const getStore = (
   const tx = db.transaction(STORE_NAME, mode);
   return tx.objectStore(STORE_NAME);
 };
+
+export const connectStore = async (mode: IDBTransactionMode = "readonly") => {
+  const db = await openDB();
+  return getStore(db, mode);
+};

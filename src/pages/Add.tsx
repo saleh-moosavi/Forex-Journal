@@ -33,7 +33,7 @@ export default function Add() {
     <div className="w-screen h-screen flex justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col w-1/2 lg:w-1/3 gap-y-2 text-xs md:text-sm p-5 backdrop-blur-md rounded-xl shadow shadow-white"
+        className="flex flex-col w-11/12 md:w-1/2 lg:w-1/3 gap-y-2 text-xs md:text-sm p-5 backdrop-blur-md rounded-xl shadow shadow-white"
       >
         <h2 className="text-center text-white text-xl font-bold mb-5">
           Add New Trade Journal

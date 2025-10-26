@@ -1,13 +1,11 @@
+import { useContext } from "react";
 import { dataType } from "../types/dataType";
-import { openDB, getStore } from "../utils/indexedDB";
-
-const connectStore = async (mode: IDBTransactionMode = "readonly") => {
-  const db = await openDB();
-  return getStore(db, mode);
-};
+import { connectStore } from "../utils/indexedDB";
+import { DataContext } from "../context/DataContext";
 
 export default function useData() {
-  //return all Data
+  const { triggerRefresh } = useContext(DataContext);
+
   const getAllData = async (): Promise<dataType[]> => {
     const store = await connectStore();
     return new Promise((resolve) => {
@@ -17,7 +15,6 @@ export default function useData() {
     });
   };
 
-  //return single Data
   const getData = async (id: number): Promise<dataType | null> => {
     const store = await connectStore();
     return new Promise((resolve) => {
@@ -27,33 +24,32 @@ export default function useData() {
     });
   };
 
-  //edit single Data
   const editData = async (id: number, data: dataType) => {
     const store = await connectStore("readwrite");
     const updated = { ...data, id };
     store.put(updated);
+    triggerRefresh();
   };
 
-  //set single Data
   const setData = async (data: dataType) => {
     const store = await connectStore("readwrite");
     store.add(data);
+    triggerRefresh();
   };
 
-  //set all Data from clipboard
   const setAllData = async (data: dataType[]) => {
     const store = await connectStore("readwrite");
-
     const clearRequest = store.clear();
     clearRequest.onsuccess = () => {
       data.forEach((item) => store.add(item));
+      triggerRefresh();
     };
   };
 
-  //delete single Data
   const deleteData = async (id: number) => {
     const store = await connectStore("readwrite");
     store.delete(id);
+    triggerRefresh();
   };
 
   return { getAllData, getData, editData, setAllData, setData, deleteData };

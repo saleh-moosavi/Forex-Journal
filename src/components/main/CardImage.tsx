@@ -22,7 +22,7 @@ export default function CardImage({ images }: { images: Blob[] }) {
         className="bg-white/30 w-full aspect-video object-cover text-white text-center"
         alt="Image"
       />
-      <article className="image-slider w-full *:h-full object-cover flex items-center overflow-x-scroll gap-2 p-2 *:cursor-pointer *:rounded-lg min-h-[88px] *:bg-white/30 *:text-white *:text-center">
+      <article className="image-slider w-full object-cover flex items-center overflow-x-scroll gap-2 p-2">
         {imageUrls.map((url: string, i: number) => (
           <img
             key={i}
@@ -31,7 +31,7 @@ export default function CardImage({ images }: { images: Blob[] }) {
             decoding="async"
             alt={`Preview image ${i}`}
             onClick={() => setCurrentImg(i)}
-            className="rounded-md object-cover w-2/5"
+            className="rounded-md object-cover w-2/5 max-h-[75px] h-full cursor-pointer bg-white/30 text-white text-center"
           />
         ))}
       </article>
