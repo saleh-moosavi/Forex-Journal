@@ -7,10 +7,6 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      workbox: {
-        skipWaiting: true,
-        clientsClaim: true,
-      },
       // includeAssets: ["favicon.svg", "robots.txt", "apple-touch-icon.png"],
       manifest: {
         name: "Forex Journal",
@@ -33,6 +29,8 @@ export default defineConfig({
         ],
       },
       workbox: {
+        skipWaiting: true,
+        clientsClaim: true,
         // adjust runtimeCaching rules if needed
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
         runtimeCaching: [

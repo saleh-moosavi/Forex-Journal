@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import InstallPWAButton from "./PwaButton";
-import useClipboard from "../hooks/useClipboard";
+import useExportData from "../hooks/useExport";
 import { ImCopy, ImHome, ImPlus } from "react-icons/im";
 
 export default function Header() {
-  const { copyToClipboard } = useClipboard();
+  const { downloadBackup } = useExportData();
 
   return (
     <div className="w-fit fixed z-50 bottom-5 inset-x-0 mx-auto flex justify-around gap-4 items-center px-4 py-1 bg-gradient-to-t from-[#330055] to-[#000022] rounded-lg shadow shadow-white">
@@ -31,7 +31,7 @@ export default function Header() {
       </Link>
 
       <div
-        onClick={copyToClipboard}
+        onClick={downloadBackup}
         className="relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500"
       >
         <ImCopy className="fill-white size-5" />
