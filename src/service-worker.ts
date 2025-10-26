@@ -26,7 +26,7 @@ registerRoute(
   ({ request }) => request.destination === "image",
   new StaleWhileRevalidate({
     cacheName: "images",
-  }),
+  })
 );
 
 self.addEventListener("message", (event) => {

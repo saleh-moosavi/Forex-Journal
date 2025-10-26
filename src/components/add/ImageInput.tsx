@@ -1,4 +1,4 @@
-import { ImageInputProps } from "../types/dataType";
+import { ImageInputProps } from "../../types/components";
 import { ChangeEvent, useEffect, useMemo, useRef } from "react";
 
 export default function ImageInput({

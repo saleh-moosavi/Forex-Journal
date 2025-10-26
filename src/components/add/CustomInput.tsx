@@ -1,4 +1,4 @@
-import { CustomInputProps } from "../types/dataType";
+import { CustomInputProps } from "../../types/components";
 
 export default function CustomInput({
   type,

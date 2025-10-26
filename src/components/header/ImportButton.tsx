@@ -1,5 +1,5 @@
 import { ImUpload } from "react-icons/im";
-import useImportData from "../hooks/useImport";
+import useImportData from "../../hooks/useImport";
 
 export function ImportBackupButton() {
   const { setBackup } = useImportData();

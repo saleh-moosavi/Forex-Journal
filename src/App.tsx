@@ -1,10 +1,10 @@
 import Toast from "./components/Toast";
-import Header from "./components/Header";
 import { openDB } from "./utils/indexedDB";
 import toastContext from "./context/Toast";
 import Loading from "./components/Loading";
 import { ToastState } from "./types/dataType";
 import AnimateBG from "./components/AnimateBG";
+import Header from "./components/header/Header";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 

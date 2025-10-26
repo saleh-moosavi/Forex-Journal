@@ -1,5 +1,5 @@
 import CardImage from "./CardImage";
-import { dataType } from "../types/dataType";
+import { dataType } from "../../types/dataType";
 import { DeleteButton, EditButton } from "./CustomButton";
 
 export default function CardView({ data }: { data: dataType }) {

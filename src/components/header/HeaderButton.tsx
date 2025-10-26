@@ -1,14 +1,12 @@
-import { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { HeaderButtonsProp } from "../../types/components";
 
-type Props = {
-  title: string;
-  icon: ReactNode;
-  link?: string;
-  onClick?: () => Promise<void> | void;
-};
-
-export default function HeaderButton({ title, icon, link, onClick }: Props) {
+export default function HeaderButton({
+  title,
+  icon,
+  link,
+  onClick,
+}: HeaderButtonsProp) {
   const baseClass =
     "relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500";
 

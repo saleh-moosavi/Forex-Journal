@@ -1,6 +1,6 @@
 import useData from "../hooks/useData";
 import { dataType } from "../types/dataType";
-import CardView from "../components/CardView";
+import CardView from "../components/main/CardView";
 import { Fragment, useEffect, useState } from "react";
 
 export default function Index() {

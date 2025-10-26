@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import useData from "../hooks/useData";
 import { useParams } from "react-router-dom";
 import { initialReducer } from "../utils/reducer";
-import ImageInput from "../components/ImageInput";
-import CustomInput from "../components/CustomInput";
-import CustomOption from "../components/CustomOption";
+import ImageInput from "../components/add/ImageInput";
+import CustomInput from "../components/add/CustomInput";
 import useAddFormSubmit from "../hooks/useAddFormSubmit";
+import CustomOption from "../components/add/CustomOption";
 
 interface useParamsType {
   id?: string | undefined;

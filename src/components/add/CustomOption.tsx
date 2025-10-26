@@ -1,4 +1,4 @@
-import { CustomOptionProps } from "../types/dataType";
+import { CustomOptionProps } from "../../types/components";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import useData from "../hooks/useData";
+import useData from "../../hooks/useData";
 
 export function DeleteButton({ id }: { id: number }) {
   const { deleteData } = useData();
