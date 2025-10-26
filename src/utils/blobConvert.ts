@@ -1,3 +1,6 @@
+/**
+ * Convert a Blob to a Base64 string (Data URL)
+ */
 export function blobToBase64(blob: Blob): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -7,14 +10,14 @@ export function blobToBase64(blob: Blob): Promise<string> {
   });
 }
 
+/**
+ * Convert a Base64 string (Data URL) back to a Blob
+ */
 export function base64ToBlob(base64: string): Blob {
-  const arr = base64.split(",");
-  const mime = arr[0].match(/:(.*?);/)![1];
-  const bstr = atob(arr[1]);
-  let n = bstr.length;
-  const u8arr = new Uint8Array(n);
-  while (n--) {
-    u8arr[n] = bstr.charCodeAt(n);
-  }
+  const [header, data] = base64.split(",");
+  const mime = header.match(/:(.*?);/)?.[1] ?? "application/octet-stream";
+  const binary = atob(data);
+  const u8arr = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) u8arr[i] = binary.charCodeAt(i);
   return new Blob([u8arr], { type: mime });
 }

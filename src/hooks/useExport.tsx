@@ -2,6 +2,7 @@ import useData from "./useData";
 import toastContext from "../context/Toast";
 import { useCallback, useContext } from "react";
 import { blobToBase64 } from "../utils/blobConvert";
+import { downloadFile } from "../utils/downloadFile";
 
 export default function useExportData() {
   const { setToast } = useContext(toastContext);
@@ -11,43 +12,31 @@ export default function useExportData() {
     try {
       const data = await getAllData();
 
-      // Convert Blobs -> Base64 strings
-      const serializedData = await Promise.all(
+      const serialized = await Promise.all(
         data.map(async (item) => ({
           ...item,
           images: await Promise.all(item.images.map(blobToBase64)),
         }))
       );
 
-      // Create JSON blob
-      const jsonString = JSON.stringify(serializedData, null, 2);
-      const blob = new Blob([jsonString], { type: "application/json" });
-
-      // Create and trigger download
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
+      const json = JSON.stringify(serialized, null, 2);
       const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-      a.href = url;
-      a.download = `backup-${timestamp}.json`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      downloadFile(json, `backup-${timestamp}.json`);
 
       setToast({
         isVisible: true,
         color: "bg-blue-600",
         text: "Backup file downloaded successfully",
       });
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
       setToast({
         isVisible: true,
         color: "bg-rose-500",
         text: "Failed to create backup file!",
       });
     }
-  }, []);
+  }, [getAllData, setToast]);
 
   return { downloadBackup };
 }
