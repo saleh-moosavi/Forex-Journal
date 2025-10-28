@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import InstallPWAButton from "./PwaButton";
 import ProfileButton from "./ProfileButton";
 import useImportData from "../../hooks/useImport";
@@ -18,11 +19,13 @@ export default function SideBar() {
 
   return (
     <div className="lg:h-full flex md:flex-col justify-between backdrop-blur-md shadow shadow-white p-2 rounded-lg z-10">
-      <img
-        src="/pwa-512.png"
-        alt="image logo"
-        className="w-10 aspect-square object-cover"
-      />
+      <Link to="/">
+        <img
+          src="/pwa-512.png"
+          alt="image logo"
+          className="w-10 aspect-square object-cover"
+        />
+      </Link>
       <article className="flex flex-row md:flex-col gap-2">
         <ProfileButton
           title="Export Data"
