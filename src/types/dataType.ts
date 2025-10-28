@@ -38,3 +38,13 @@ export type SetToastType = React.Dispatch<
     color: "bg-rose-500" | "bg-blue-600";
   }>
 >;
+
+export interface analyzedDataType {
+  dataCount: number;
+  tpCount: number;
+  slCount: number;
+  winRate: string;
+  loseRate: string;
+  EuroTrade: number;
+  GoldTrade: number;
+}
