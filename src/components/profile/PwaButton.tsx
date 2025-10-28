@@ -1,3 +1,4 @@
+import ProfileButton from "./ProfileButton";
 import { MdInstallDesktop } from "react-icons/md";
 import React, { useEffect, useState } from "react";
 
@@ -50,16 +51,11 @@ const InstallPWAButton: React.FC = () => {
   if (!isVisible) return null;
 
   return (
-    <div
+    <ProfileButton
+      title="Install App"
+      icon={<MdInstallDesktop />}
       onClick={handleInstallClick}
-      className="relative group hover:cursor-pointer hover:bg-slate-800 p-2 rounded-full transition-all duration-500"
-    >
-      <MdInstallDesktop className="fill-white size-5" />
-
-      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-max px-2 py-1 text-white bg-black rounded-md opacity-0 transform scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100">
-        Install App
-      </div>
-    </div>
+    />
   );
 };
 

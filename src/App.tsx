@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const Add = lazy(() => import("./pages/Add"));
 const Index = lazy(() => import("./pages/Index"));
+const Profile = lazy(() => import("./pages/Profile"));
 
 export default function App() {
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function App() {
                 <Route path="/" element={<Index />} />
                 <Route path="/add" element={<Add />} />
                 <Route path="/add/:id" element={<Add />} />
+                <Route path="/profile" element={<Profile />} />
               </Routes>
             </Suspense>
           </BrowserRouter>

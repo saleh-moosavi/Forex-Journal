@@ -3,8 +3,12 @@ import { ReactNode } from "react";
 export interface HeaderButtonsProp {
   title: string;
   icon: ReactNode;
-  link?: string;
-  onClick?: () => Promise<void> | void;
+  link: string;
+}
+
+export interface ProfileButtonsProp extends Omit<HeaderButtonsProp, "link"> {
+  onClick: () => Promise<void> | void;
+  children?: ReactNode;
 }
 
 export interface CustomOptionProps {
