@@ -4,8 +4,8 @@ export const extractData = (data: dataType[]) => {
   const dataCount = data.length;
   const tpCount = data.filter((item) => item.result === "TP").length;
   const slCount = data.filter((item) => item.result === "SL").length;
-  const winRate = ((tpCount / dataCount) * 100).toFixed(2);
-  const loseRate = ((slCount / dataCount) * 100).toFixed(2);
+  const winRate = parseInt(((tpCount / dataCount) * 100).toFixed(2)) || 0;
+  const loseRate = parseInt(((slCount / dataCount) * 100).toFixed(2)) || 0;
   const EuroTrade = data.filter((item) => item.currency === "EURUSD").length;
   const GoldTrade = data.filter((item) => item.currency === "XAUUSD").length;
 

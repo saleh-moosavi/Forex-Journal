@@ -22,7 +22,7 @@ export default function Profile() {
   return (
     <article className="flex flex-col md:flex-row min-h-full md:h-full gap-5 p-5 mb-20 lg:mb-0 text-white">
       <SideBar />
-      <section className="w-full min-h-full grid md:grid-cols-2 *:col-span-1 gap-5 rounded-lg p-2 backdrop-blur-md shadow shadow-white">
+      <section className="w-full min-h-full grid md:grid-cols-2 *:col-span-1 gap-5 rounded-lg backdrop-blur-md shadow shadow-white">
         <Chart data={analyzedData} />
         <Content data={analyzedData} />
       </section>

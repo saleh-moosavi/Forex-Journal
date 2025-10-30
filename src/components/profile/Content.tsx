@@ -2,7 +2,7 @@ import { analyzedDataType } from "../../types/dataType";
 
 export default function Content({ data }: { data: analyzedDataType | null }) {
   return (
-    <div className="rounded-lg overflow-hidden">
+    <div className="rounded-lg overflow-hidden m-5">
       <table className="min-w-full border border-white/10 text-white text-sm h-full mt-auto">
         <tbody>
           {[

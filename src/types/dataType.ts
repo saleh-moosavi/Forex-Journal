@@ -43,8 +43,8 @@ export interface analyzedDataType {
   dataCount: number;
   tpCount: number;
   slCount: number;
-  winRate: string;
-  loseRate: string;
+  winRate: number;
+  loseRate: number;
   EuroTrade: number;
   GoldTrade: number;
 }
