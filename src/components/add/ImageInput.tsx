@@ -34,6 +34,7 @@ export default function ImageInput({
         ref={inputRef}
         className="hidden"
         onChange={handleFileChange}
+        accept=".png , .jpg , .jpeg , .webp"
       />
       <button
         type="button"

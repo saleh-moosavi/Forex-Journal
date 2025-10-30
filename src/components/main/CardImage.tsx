@@ -1,7 +1,9 @@
+import FullScreenImage from "./FullScreenImage";
 import { useEffect, useMemo, useState } from "react";
 
 export default function CardImage({ images }: { images: Blob[] }) {
   const [currentImg, setCurrentImg] = useState(0);
+  const [showFull, setShowFull] = useState(false);
 
   const imageUrls = useMemo(() => {
     if (!images?.length) return [];
@@ -17,8 +19,14 @@ export default function CardImage({ images }: { images: Blob[] }) {
 
   return (
     <>
+      <FullScreenImage
+        isOpen={showFull}
+        setIsOpen={setShowFull}
+        url={imageUrls[currentImg]}
+      />
       <img
         src={imageUrls[currentImg]}
+        onClick={() => setShowFull(true)}
         className="bg-white/30 w-full aspect-video object-cover text-white text-center"
         alt="Image"
       />

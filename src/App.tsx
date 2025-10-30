@@ -1,3 +1,5 @@
+import PopUp from "./components/PopUp";
+import Toast from "./components/Toast";
 import { openDB } from "./utils/indexedDB";
 import Loading from "./components/Loading";
 import AnimateBG from "./components/AnimateBG";
@@ -11,8 +13,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 const Add = lazy(() => import("./pages/Add"));
 const Index = lazy(() => import("./pages/Index"));
 const Profile = lazy(() => import("./pages/Profile"));
-const Toast = lazy(() => import("./components/Toast"));
-const PopUp = lazy(() => import("./components/PopUp"));
 
 export default function App() {
   useEffect(() => {
