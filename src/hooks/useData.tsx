@@ -2,8 +2,10 @@ import { useContext } from "react";
 import { dataType } from "../types/dataType";
 import { connectStore } from "../utils/indexedDB";
 import { DataContext } from "../context/DataContext";
+import { toastContext } from "../context/ToastContext";
 
 export default function useData() {
+  const { setToast } = useContext(toastContext);
   const { triggerRefresh } = useContext(DataContext);
 
   const getAllData = async (): Promise<dataType[]> => {
@@ -28,12 +30,22 @@ export default function useData() {
     const store = await connectStore("readwrite");
     const updated = { ...data, id };
     store.put(updated);
+    setToast({
+      isVisible: true,
+      color: "bg-blue-600",
+      text: `Item Edited Successfully`,
+    });
     triggerRefresh();
   };
 
   const setData = async (data: dataType) => {
     const store = await connectStore("readwrite");
     store.add(data);
+    setToast({
+      isVisible: true,
+      color: "bg-blue-600",
+      text: `Journal Added Successfully`,
+    });
     triggerRefresh();
   };
 
@@ -49,6 +61,11 @@ export default function useData() {
   const deleteData = async (id: number) => {
     const store = await connectStore("readwrite");
     store.delete(id);
+    setToast({
+      isVisible: true,
+      color: "bg-blue-600",
+      text: `Item Deleted Successfully`,
+    });
     triggerRefresh();
   };
 

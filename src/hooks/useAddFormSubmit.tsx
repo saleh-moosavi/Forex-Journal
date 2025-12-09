@@ -28,7 +28,7 @@ export default function useAddFormSubmit({ id }: { id: number | null }) {
     } else {
       setToast({
         isVisible: true,
-        text: `Something Went Wrong`,
+        text: `Please Fill The Form Currectly`,
         color: "bg-rose-500",
       });
       setError(response.error);

@@ -1,4 +1,5 @@
 import useData from "../hooks/useData";
+import { Link } from "react-router-dom";
 import { dataType } from "../types/dataType";
 import CardView from "../components/main/CardView";
 import { DataContext } from "../context/DataContext";
@@ -15,9 +16,17 @@ export default function Index() {
 
   if (data.length === 0) {
     return (
-      <p className="text-3xl text-white font-bold flex justify-center items-center h-full animate-pulse">
-        Nothing To Share
-      </p>
+      <article className="flex flex-col justify-center items-center gap-10 h-full">
+        <p className="text-3xl text-white font-bold animate-pulse">
+          Your Journal List is Empty
+        </p>
+        <Link
+          to="/add"
+          className="text-white font-bold px-8 py-2 border rounded-lg backdrop-blur-sm hover:border-purple-300 hover:text-purple-300 transition-all duration-200"
+        >
+          Add a Journal
+        </Link>
+      </article>
     );
   }
 
